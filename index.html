@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Form</title>
+    <title>Login Form with Cat GIFs</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
             height: 100vh;
             background-color: #f5f5f5;
@@ -58,9 +58,27 @@
             margin-top: 20px;
             font-size: 16px;
         }
+
+        .cat-gifs {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .cat-gif {
+            width: 120px;
+            height: 120px;
+        }
     </style>
 </head>
 <body>
+    <div class="cat-gifs" id="catGifsContainer">
+        <!-- The cat gifs will be inserted here -->
+    </div>
+
     <div class="login-box">
         <h1>Login</h1>
         <form action="#" method="POST">
@@ -72,6 +90,19 @@
             Not a member? <a href="#">Create Account</a>
         </div>
     </div>
+
+    <script>
+        const catGifsContainer = document.getElementById('catGifsContainer');
+        
+        for (let i = 0; i < 8; i++) {
+            const catGif = document.createElement('img');
+            catGif.src = "https://cataas.com/cat/gif";
+            catGif.alt = "Random Cat Gif";
+            catGif.classList.add('cat-gif');
+            
+            catGifsContainer.appendChild(catGif);
+        }
+    </script>
 </body>
 </html>
 
