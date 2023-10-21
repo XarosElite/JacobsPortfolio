@@ -3,71 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Form with Cat GIFs</title>
+    <title>Endless Cat GIFs</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            height: 100vh;
             background-color: #f5f5f5;
         }
-        .login-box {
-            background-color: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 350px;
-        }
-        .login-box h1 {
-            text-align: center;
-            font-size: 24px;
-            margin-bottom: 30px;
-        }
-        .login-box input[type="text"], .login-box input[type="password"] {
-            width: calc(100% - 40px); /* Subtracting the left and right padding */
-            padding: 15px 20px;  /* Updated padding */
-            margin: 8px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .login-box input[type="submit"] {
-            width: calc(100% - 40px); /* Subtracting the left and right padding */
-            padding: 15px 20px;  /* Updated padding */
-            background-color: dodgerblue;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-top: 15px;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .login-box input[type="submit"]:hover {
-            background-color: deepskyblue;
-        }
-        .signup-text {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 16px;
-        }
-
-        .cat-gifs {
+        .cat-row {
             display: flex;
             justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
             gap: 10px;
             margin-bottom: 20px;
         }
-
         .cat-gif {
             width: 120px;
             height: 120px;
@@ -75,33 +22,39 @@
     </style>
 </head>
 <body>
-    <div class="cat-gifs" id="catGifsContainer">
-        <!-- The cat gifs will be inserted here -->
-    </div>
-
-    <div class="login-box">
-        <h1>Login</h1>
-        <form action="#" method="POST">
-            <input type="text" name="username" placeholder="I like men" required>
-            <input type="password" name="password" placeholder="Email Address" required>
-            <input type="submit" value="LOGIN">
-        </form>
-        <div class="signup-text">
-            Not a member? <a href="#">Create Account</a>
-        </div>
+    <div id="catsContainer">
+        <!-- Cat GIFs will be inserted here -->
     </div>
 
     <script>
-        const catGifsContainer = document.getElementById('catGifsContainer');
-        
-        for (let i = 0; i < 8; i++) {
-            const catGif = document.createElement('img');
-            catGif.src = `https://cataas.com/cat/gif?random=${Math.random()}`;
-            catGif.alt = "Random Cat Gif";
-            catGif.classList.add('cat-gif');
-            
-            catGifsContainer.appendChild(catGif);
+        const catsContainer = document.getElementById('catsContainer');
+
+        function createCatRow() {
+            const catRow = document.createElement('div');
+            catRow.classList.add('cat-row');
+            for (let i = 0; i < 10; i++) {
+                const catGif = document.createElement('img');
+                catGif.src = `https://cataas.com/cat/gif?random=${Math.random()}`;
+                catGif.alt = "Random Cat Gif";
+                catGif.classList.add('cat-gif');
+                catRow.appendChild(catGif);
+            }
+            catsContainer.appendChild(catRow);
         }
+
+        // Create an initial set of rows
+        for (let i = 0; i < 50; i++) {
+            createCatRow();
+        }
+
+        // Load more rows as the user scrolls to the bottom of the page
+        window.addEventListener('scroll', () => {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+                for (let i = 0; i < 10; i++) {
+                    createCatRow();
+                }
+            }
+        });
     </script>
 </body>
 </html>
